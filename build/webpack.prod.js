@@ -39,7 +39,6 @@ module.exports = merge(baseConfig, {
         standard: [/^ant-/], // 过滤以ant-开头的类名，哪怕没用到也不删除
       }
     }),
-    // 打包生成gzip插件
     new CompressionPlugin({
       test: /\.(js|css)$/, // 只生成css,js压缩文件
       filename: '[path][base].gz', // 文件命名
@@ -70,15 +69,15 @@ module.exports = merge(baseConfig, {
           name: 'vendors', // 提取文件命名为vendors,js后缀和chunkhash会自动加
           minChunks: 1, // 只要使用一次就提取出来
           chunks: 'initial', // 只提取初始化就能获取到的模块，不管异步的
-          minSize: 0, // 提取代码体积大于0就提取出来
+          minSize: 2000, // 提取代码体积大于0就提取出来
           priority: 1, // 提取优先级为1
         },
-        // commons: { // 提取页面公共代码
-        //   name: 'commons', // 提取文件命名为commons
-        //   minChunks: 2, // 只要使用两次就提取出来
-        //   chunks: 'initial', // 只提取初始化就能获取到的模块，不管异步的
-        //   minSize: 0, // 提取代码体积大于0就提取出来
-        // }
+        commons: { // 提取页面公共代码
+          name: 'commons', // 提取文件命名为commons
+          minChunks: 1, // 只要使用两次就提取出来
+          chunks: 'initial', // 只提取初始化就能获取到的模块，不管异步的
+          minSize: 2000, // 提取代码体积大于0就提取出来
+        }
       }
     }
   },
