@@ -1,0 +1,12 @@
+/dist/*
+.local
+/node_modules/**
+
+**/*.svg
+**/*.sh
+
+/public/*
+/build
+*.config.js
+getEnv.ts
+vite.config.ts
