@@ -52,6 +52,23 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 		plugins: [
 			react({
 				babel: {
+					// "presets": [
+					// 	[
+					// 	  "@babel/preset-env",
+					// 	  {
+					// 		// 设置兼容目标浏览器版本,这里可以不写，babel-loader会自动寻找上面配置好的文件.browserslistrc
+					// 		// "targets": {
+					// 		//  "chrome": 35,
+					// 		//  "ie": 9
+					// 		// },
+					// 		"useBuiltIns": "usage", // 根据配置的浏览器兼容，以及代码中使用到的api进行引入polyfill按需添加
+					// 		"corejs": 3 // 配置使用core-js低版本
+					// 	  }
+					// 	],
+					// 	"@babel/preset-react",
+					// 	"@babel/preset-typescript"
+					//   ],
+					// configFile: true,
 					plugins: [["@babel/plugin-proposal-decorators", { "legacy": true }]]
 				}}),
 			createHtmlPlugin({
@@ -62,9 +79,11 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 				}
 			}),
 			// * EsLint 报错信息显示在浏览器界面上
-			eslintPlugin(),
+			eslintPlugin({
+				failOnError: false
+			}),
 			// * 是否生成包预览
-			viteEnv.VITE_REPORT && visualizer(),
+			// viteEnv.VITE_REPORT && visualizer(),
 			// * gzip compress
 			viteEnv.VITE_BUILD_GZIP &&
 				viteCompression({
