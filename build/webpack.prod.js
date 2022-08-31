@@ -14,17 +14,17 @@ module.exports = merge(baseConfig, {
   mode: 'production',
   plugins: [
     // 复制文件插件
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, '../public'), // 复制public下文件
-          to: path.resolve(__dirname, '../dist'), // 复制到dist目录中
-          filter: source => {
-            return !source.includes('index.html') // 忽略index.html
-          }
-        },
-      ],
-    }),
+    // new CopyPlugin({
+    //   patterns: [
+    //     {
+    //       from: path.resolve(__dirname, '../public'), // 复制public下文件
+    //       to: path.resolve(__dirname, '../wdist'), // 复制到dist目录中
+    //       filter: source => {
+    //         return !source.includes('index.html') // 忽略index.html
+    //       }
+    //     },
+    //   ],
+    // }),
     // 抽离css插件
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[contenthash:8].css'
@@ -33,7 +33,7 @@ module.exports = merge(baseConfig, {
     new PurgeCSSPlugin({
       paths: globAll.sync([
         `${path.join(__dirname, '../src')}/**/*.tsx`,
-        `${path.join(__dirname, '../public')}/index.html`
+        `${path.join(__dirname, '..')}/index.html`
       ]),
       safelist: {
         standard: [/^ant-/], // 过滤以ant-开头的类名，哪怕没用到也不删除

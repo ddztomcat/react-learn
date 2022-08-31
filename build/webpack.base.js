@@ -12,7 +12,7 @@ module.exports = {
   // 打包文件出口
   output: {
     filename: 'static/js/[name].[chunkhash:8].js', // 每个输出js的名称
-    path: path.resolve(__dirname, '../dist'), // 打包的出口文件夹路径
+    path: path.resolve(__dirname, '../wdist'), // 打包的出口文件夹路径
     clean: true, // webpack4需要配置clean-webpack-plugin删除dist文件，webpack5内置了。
     publicPath: '/', // 打包后文件的公共前缀路径
   },
