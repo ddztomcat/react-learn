@@ -21,7 +21,7 @@ module.exports = {
       {
         test: /\.css$/, //匹配所有的 less 文件
         enforce: 'pre',
-        include: [path.resolve(__dirname, '../src')],
+        // include: [path.resolve(__dirname, '../src')],
         use: [
           isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
@@ -31,7 +31,7 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         enforce: 'pre',
-        include: [path.resolve(__dirname, '../src')],
+        // include: [path.resolve(__dirname, '../src')],
         use: [
           isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
@@ -42,7 +42,7 @@ module.exports = {
       {
         test: /\.less$/, //匹配所有的 less 文件
         enforce: 'pre',
-        include: [path.resolve(__dirname, '../src')],
+        // include: [path.resolve(__dirname, '../src')],
         use: [
           isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
