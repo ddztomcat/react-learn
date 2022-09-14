@@ -40,6 +40,19 @@ export default function apiAuth() {
                 });
                 // 完成鉴权后，便可在 window.h5sdk.ready 里调用 JSAPI
                 window.h5sdk.ready(() => {
+                    tt.requestAuthCode({
+                        appId: res.data.appid,
+                        success: (info) => {
+                          console.info(info.code)
+                          axios.get(`/fs/getUserInfo?code=${info.code}`)
+                          .then(res => {
+                            console.log('用户 userid', res)
+                          })
+                        },
+                        fail: (error) => {
+                          console.error(error)
+                        }
+                      });
                     // window.h5sdk.ready回调函数在环境准备就绪时触发
                     // 调用 getUserInfo API 获取已登录用户的基本信息，详细文档参见https://open.feishu.cn/document/uYjL24iN/ucjMx4yNyEjL3ITM
                     tt.getUserInfo({
