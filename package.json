@@ -4,6 +4,7 @@
 	"description": "使用webpack5从零搭建完整的react18+ts构建环境",
 	"main": "index.js",
 	"scripts": {
+		"startServer": "nodemon server/index --config nodemon.json",
 		"prepare": "husky install",
 		"commit": "git add . && git cz",
 		"commit-no-verify": "git add . && git cz ",
@@ -74,6 +75,7 @@
 		"less-loader": "^11.0.0",
 		"lint-staged": "^13.0.3",
 		"mini-css-extract-plugin": "^2.6.1",
+		"nodemon": "^2.0.19",
 		"postcss": "^8.4.14",
 		"postcss-loader": "^7.0.0",
 		"prettier": "^2.7.1",
@@ -105,6 +107,9 @@
 	},
 	"dependencies": {
 		"antd": "^4.22.8",
+		"axios": "^0.27.2",
+		"express": "^4.18.1",
+		"js-sha1": "^0.6.0",
 		"react": "^18.1.0",
 		"react-dom": "^18.1.0",
 		"react-router-dom": "^6.3.0"

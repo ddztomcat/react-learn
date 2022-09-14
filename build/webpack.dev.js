@@ -10,14 +10,19 @@ module.exports = () => getPort().then(port => {
     mode: 'development', // 开发模式，不会压缩最终代码
     devServer: {
       open: true,
-      port: port, // 服务端口号
+      port: 64610, // 服务端口号
       compress: false, // gzip压缩，开发环境不开启，提升速度
       // 解决路由跳转404问题
       historyApiFallback: true,
       hot: true,
       static: { //托管静态资源文件
         directory: path.join(__dirname, "../public"),
-      }
+      },
+      proxy: {
+        '/fs': {
+          target: 'http://localhost:9000',
+        }
+      },
     },
     devtool: 'eval-cheap-module-source-map',
     plugins: [

@@ -1,6 +1,9 @@
 // * Vite
 declare type Recordable<T = any> = Record<string, T>;
-
+declare namespace h5sdk {
+	function error(): any;
+	function config(): any
+}
 declare interface ViteEnv {
 	VITE_API_URL: string;
 	VITE_PORT: number;
