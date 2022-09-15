@@ -4,9 +4,9 @@ const app = express()
 const md5 = require('js-sha1')
 const port = 9000
 var apiv1 = express.Router();
-const APP_ID = 'cli_a38d8eda697e900d'
-const APP_SECRET = 'aW5l1g2ZXripMDpQSewYwfuHW4yqKGio'
-const FEISHU_HOST = 'https://open.feishu.cn'
+const APP_ID = 'cli_a3ab190de278d076'
+const APP_SECRET = 'xadgUH2srOf7tSdYMbBoNWMuRwHSGKcZ'
+const FEISHU_HOST = 'https://open.work.sany.com.cn'
 
 const TENANT_ACCESS_TOKEN_URI = "/open-apis/auth/v3/tenant_access_token/internal"
 const JSAPI_TICKET_URI = "/open-apis/jssdk/ticket/get"
@@ -14,7 +14,7 @@ const NONCE_STR = '13oEviLbrTo458A3NjrOwS70oTOXVOAm'
 
 function getAccessToken() {
     let url = `${FEISHU_HOST}${TENANT_ACCESS_TOKEN_URI}`
-
+    console.log(url)
     return axios.post(url, { "app_id": APP_ID, "app_secret": APP_SECRET })
         .then(v => {
             console.log(v.data)
@@ -55,7 +55,7 @@ apiv1.get('/get_config_parameters', async function (req, res) {
 
 apiv1.get('/getUserInfo', async function(req, res) {
     let code = req.query["code"]
-    let url = 'https://open.feishu.cn/open-apis/authen/v1/access_token'
+    let url = FEISHU_HOST + '/open-apis/authen/v1/access_token'
     let ac = await getAccessToken()
     let ans = await axios.post(url, {
         "grant_type": "authorization_code",

@@ -50,6 +50,7 @@ export default function apiAuth() {
                           })
                         },
                         fail: (error) => {
+                            console.log(0)
                           console.error(error)
                         }
                       });

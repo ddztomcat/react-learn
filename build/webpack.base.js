@@ -8,7 +8,7 @@ const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
   // 入口文件
-  entry: path.resolve(__dirname, '../src/index.tsx'),
+  entry: path.resolve(__dirname, '../src/main.tsx'),
   // 打包文件出口
   output: {
     filename: 'static/js/[name].[chunkhash:8].js', // 每个输出js的名称
