@@ -1,11 +1,17 @@
 import React from "react";
-import { Outlet, Link } from "react-router-dom";
-import { getContacts } from "../contacts";
+import { Outlet, Link, Form, useLoaderData, redirect, NavLink, useNavigation, } from "react-router-dom";
+import { getContacts, createContact } from "../contacts";
 export async function loader() {
     const contacts = await getContacts();
     return { contacts };
 }
+export async function action() {
+    const contact = await createContact();
+    return redirect(`/contacts/${contact.id}/edit`);
+}
 export default function Root() {
+    const { contacts } = useLoaderData();
+    const navigation = useNavigation();
     return (
         <>
             <div id="sidebar">
@@ -34,17 +40,35 @@ export default function Root() {
                     </form>
                 </div>
                 <nav>
-                    <ul>
-                        <li>
-                            <Link to={`contacts/1`}>Your Name</Link>
-                        </li>
-                        <li>
-                            <Link to={`contacts/2`}>Your Friend</Link>
-                        </li>
-                    </ul>
+                    {contacts.length ? (
+                        <ul>
+                            {contacts.map((contact) => (
+                                <li key={contact.id}>
+                                    <NavLink
+                                        to={`contacts/${contact.id}`}
+                                        className={({ isActive, isPending }) =>
+                                            isActive
+                                                ? "active"
+                                                : isPending
+                                                    ? "pending"
+                                                    : ""
+                                        }
+                                    >
+                                        {/* other code */}
+                                    </NavLink>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p>
+                            <i>No contacts</i>
+                        </p>
+                    )}
                 </nav>
             </div>
-            <div id="detail">
+            <div id="detail" className={
+                navigation.state === "loading" ? "loading" : ""
+            }>
                 <Outlet />
             </div>
         </>
